@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Brad R. Marshall",
+  "classifications": ["Solution File"],
+  "name": "Repository Solution File",
+  "identity": "Repository.Solution",
+  "shortName": "reposln",
+  "sourceName": "SolutionFile",
+  "tags": {
+    "language": "C#",
+    "type":"item"
+  }
+}
