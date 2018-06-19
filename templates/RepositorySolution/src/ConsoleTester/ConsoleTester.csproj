@@ -1,7 +1,7 @@
 ﻿<Project>
 
   <PropertyGroup>
-    <EnableGlobbing>true</EnableGlobbing>
+    <IncludeCommonReferences>true</IncludeCommonReferences>
   </PropertyGroup>
 
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />

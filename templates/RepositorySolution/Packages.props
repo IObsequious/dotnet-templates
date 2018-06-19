@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project>
   <!--Implicit Package References-->
-  <ItemGroup>
+  <!--<ItemGroup>
     <PackageVersion Include="Newtonsoft.Json.Schema" Version="[3.0.10]"/>
     <PackageVersion Include="ICSharpCode.NRefactory" Version="5.5.1" />
     <PackageVersion Include="ICSharpCode.TextEditor" Version="3.2.1.6466" />
@@ -98,6 +98,6 @@
     <PackageVersion Include="Microsoft.VisualStudio.VSHelp" Version="[7.0.4]" />
     <PackageVersion Include="Microsoft.VisualStudio.WCFReference.Interop" Version="[9.0.30730]" />
     <PackageVersion Include="Newtonsoft.Json" Version="[11.0.1]" />
-  </ItemGroup>
+  </ItemGroup>-->
 
 </Project>

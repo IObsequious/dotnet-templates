@@ -54,13 +54,13 @@ Copyright (c) Ollon, LLC. All rights reserved.
   <!--   Generate AssemblyInfo   -->
   <!--                           -->
 
-  <PropertyGroup>
+  <PropertyGroup Condition="'$(SkipGenerateAssemblyInfo)' != 'true'">
     <GeneratedAssemblyInfoFile>$(IntermediateOutputPath)GeneratedAssemblyInfo_$(BuildVersion)$(GeneratedFileExtension)</GeneratedAssemblyInfoFile>
     <InternalsVisibleToSuffix>, PublicKey=$(PublicKey)</InternalsVisibleToSuffix>
     <GeneratedInternalsVisibleToFile>$(IntermediateOutputPath)GeneratedInternalsVisibleTo$(GeneratedFileExtension)</GeneratedInternalsVisibleToFile>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(SkipGenerateAssemblyInfo)' != 'true'">
     <AssemblyVersionAttribute Include="System.Reflection.AssemblyTitleAttribute">
       <_Parameter1>$(AssemblyName)</_Parameter1>
     </AssemblyVersionAttribute>
@@ -91,8 +91,8 @@ Copyright (c) Ollon, LLC. All rights reserved.
   <!--   Generate InternalsVisibleTo   -->
   <!--                                 -->
 
-  <Target Name="GenerateAssemblyInfoFile" Inputs="$(MSBuildThisFileFullPath)" Outputs="$(GeneratedAssemblyInfoFile)" DependsOnTargets="PrepareForBuild">
-
+  <Target Name="GenerateAssemblyInfoFile" Inputs="$(MSBuildThisFileFullPath)" Outputs="$(GeneratedAssemblyInfoFile)" DependsOnTargets="PrepareForBuild" Condition="'$(SkipGenerateAssemblyInfo)' != 'true'">
+    
     <WriteCodeFragment AssemblyAttributes="@(AssemblyVersionAttribute)" Language="$(Language)" OutputFile="$(GeneratedAssemblyInfoFile)">
       <Output TaskParameter="OutputFile" ItemName="Compile" />
       <Output TaskParameter="OutputFile" ItemName="FileWrites" />
@@ -100,7 +100,7 @@ Copyright (c) Ollon, LLC. All rights reserved.
 
   </Target>
 
-  <PropertyGroup>
+  <PropertyGroup Condition="'$(SkipGenerateAssemblyInfo)' != 'true'">
     <CoreCompileDependsOn>
       GenerateAssemblyInfoFile;
       $(CoreCompileDependsOn)
@@ -213,19 +213,22 @@ Copyright (c) Ollon, LLC. All rights reserved.
     <DestinationModuleManifest>$(ModuleFolder)$(AssemblyName).psd1</DestinationModuleManifest>
   </PropertyGroup>
 
-  <PropertyGroup>
+  <PropertyGroup Condition="'$(DisableSuperCleanTarget)' != 'true'">
     <CleanDependsOn>
       $(CleanDependsOn);
       SuperClean;
     </CleanDependsOn>
   </PropertyGroup>
   
-  <Target Name="SuperClean">
+  <Target Name="SuperClean" Condition="'$(DisableSuperCleanTarget)' != 'true'">
     <ItemGroup>
       <RemoveFiles Include="$(OutputPath)\*.*" />
+      <RemoveFiles Include="$(BaseIntermediateOutputPath)\**\*" />
     </ItemGroup>
+    <Message Importance="high" Text="------ SuperClean started: Project: $(MSBuildProjectName), Configuration:  $(Configuration)|$(Platform) ------" />
     <RemoveDir Directories="$(ModuleFolder)" Condition="Exists('$(ModuleFolder)')" />
     <Delete Files="@(RemoveFiles)" />
+    <Message Importance="high" Text="------ SuperClean ended: Project: $(MSBuildProjectName), Configuration:  $(Configuration)|$(Platform) ------" />
   </Target>
 
   <Target Name="CreateDebuggableModule" AfterTargets="AfterBuild" Condition="'$(IsPowerShellProject)'=='true'">
@@ -330,13 +333,77 @@ Copyright (c) Ollon, LLC. All rights reserved.
   <Import Project="$(CustomAfterCentralPackageVersionsTargets)" Condition=" '$(CustomAfterCentralPackageVersionsTargets)' != '' And Exists('$(CustomAfterCentralPackageVersionsTargets)') " />
 
 
-  <ItemGroup>
-    <Reference Include="System">
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="System.Core">
-      <Private>false</Private>
-    </Reference>
-  </ItemGroup>
+  <Choose>
+    <When Condition="$(IncludeCommonReferences) == 'true'">
+      <ItemGroup>
+        <Reference Include="System">
+          <Private>false</Private>
+        </Reference>
+        <Reference Include="System.Core">
+          <Private>false</Private>
+        </Reference>
+        <Reference Include="System.Xml">
+          <Private>false</Private>
+        </Reference>
+        <Reference Include="System.Xml.Linq">
+          <Private>false</Private>
+        </Reference>
+        <Reference Include="System.Net">
+          <Private>false</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
+  <Choose>
+    <When Condition="$(IncludeUIReferences) == 'true'">
+      <ItemGroup>
+        <Reference Include="System.Xaml">
+          <Private>false</Private>
+        </Reference>
+        <Reference Include="WindowsBase">
+          <Private>false</Private>
+        </Reference>
+        <Reference Include="PresentationCore">
+          <Private>false</Private>
+        </Reference>
+        <Reference Include="PresentationFramework">
+          <Private>false</Private>
+        </Reference>
+        <Reference Include="CustomMarshalers">
+          <Private>false</Private>
+        </Reference>
+        <Reference Include="WindowsFormsIntegration">
+          <Private>false</Private>
+        </Reference>
+        <Reference Include="System.Windows.Forms">
+          <Private>false</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
+  <Choose>
+    <When Condition="$(IncludeDataReferences) == 'true'">
+      <ItemGroup>
+        <Reference Include="System.Data">
+          <Private>false</Private>
+        </Reference>
+        <Reference Include="System.Data.DataSetExtensions">
+          <Private>false</Private>
+        </Reference>
+        <Reference Include="System.ComponentModel.DataAnnotations">
+          <Private>false</Private>
+        </Reference>
+        <Reference Include="System.Data.Entity">
+          <Private>false</Private>
+        </Reference>
+        <Reference Include="System.Data.Entity.Design">
+          <Private>false</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+ 
 
 </Project>
