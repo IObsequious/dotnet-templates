@@ -213,21 +213,36 @@ Copyright (c) Ollon, LLC. All rights reserved.
     <DestinationModuleManifest>$(ModuleFolder)$(AssemblyName).psd1</DestinationModuleManifest>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(DisableSuperCleanTarget)' != 'true'">
-    <CleanDependsOn>
-      $(CleanDependsOn);
+  <PropertyGroup>
+    <AfterCleanDependsOn>
       SuperClean;
-    </CleanDependsOn>
+    </AfterCleanDependsOn>
+    <BeforeRebuildDependsOn>
+      SuperClean;
+    </BeforeRebuildDependsOn>
   </PropertyGroup>
+
+  <Target Name="BeforeRebuild" DependsOnTargets="$(BeforeRebuildDependsOn)" Condition="'$(DisableSuperCleanTarget)'!='true'">
+  </Target>
+
+  <Target Name="AfterClean" DependsOnTargets="$(AfterCleanDependsOn)"  Condition="'$(DisableSuperCleanTarget)'!='true'"> 
+  </Target>
+  
+  <Target Name="SuperRestore">
+    <Message Importance="high" Text="------ SuperRestore started: Project: $(MSBuildProjectName), Configuration:  $(Configuration)|$(Platform) ------" />
+    <CallTarget Targets="Restore" />
+    <Message Importance="high" Text="------ SuperRestore ended: Project: $(MSBuildProjectName), Configuration:  $(Configuration)|$(Platform) ------" />
+  </Target>
   
   <Target Name="SuperClean" Condition="'$(DisableSuperCleanTarget)' != 'true'">
     <ItemGroup>
-      <RemoveFiles Include="$(OutputPath)\*.*" />
+      <RemoveFiles Include="$(OutputPath)\**\*.*" />
       <RemoveFiles Include="$(BaseIntermediateOutputPath)\**\*" />
     </ItemGroup>
     <Message Importance="high" Text="------ SuperClean started: Project: $(MSBuildProjectName), Configuration:  $(Configuration)|$(Platform) ------" />
     <RemoveDir Directories="$(ModuleFolder)" Condition="Exists('$(ModuleFolder)')" />
     <Delete Files="@(RemoveFiles)" />
+    <CallTarget Targets="SuperRestore" />
     <Message Importance="high" Text="------ SuperClean ended: Project: $(MSBuildProjectName), Configuration:  $(Configuration)|$(Platform) ------" />
   </Target>
 
