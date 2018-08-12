@@ -92,7 +92,7 @@ Copyright (c) Ollon, LLC. All rights reserved.
   <!--                                 -->
 
   <Target Name="GenerateAssemblyInfoFile" Inputs="$(MSBuildThisFileFullPath)" Outputs="$(GeneratedAssemblyInfoFile)" DependsOnTargets="PrepareForBuild" Condition="'$(SkipGenerateAssemblyInfo)' != 'true'">
-    
+
     <WriteCodeFragment AssemblyAttributes="@(AssemblyVersionAttribute)" Language="$(Language)" OutputFile="$(GeneratedAssemblyInfoFile)">
       <Output TaskParameter="OutputFile" ItemName="Compile" />
       <Output TaskParameter="OutputFile" ItemName="FileWrites" />
@@ -213,36 +213,21 @@ Copyright (c) Ollon, LLC. All rights reserved.
     <DestinationModuleManifest>$(ModuleFolder)$(AssemblyName).psd1</DestinationModuleManifest>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <AfterCleanDependsOn>
+  <PropertyGroup Condition="'$(DisableSuperCleanTarget)' != 'true'">
+    <CleanDependsOn>
+      $(CleanDependsOn);
       SuperClean;
-    </AfterCleanDependsOn>
-    <BeforeRebuildDependsOn>
-      SuperClean;
-    </BeforeRebuildDependsOn>
+    </CleanDependsOn>
   </PropertyGroup>
-
-  <Target Name="BeforeRebuild" DependsOnTargets="$(BeforeRebuildDependsOn)" Condition="'$(DisableSuperCleanTarget)'!='true'">
-  </Target>
-
-  <Target Name="AfterClean" DependsOnTargets="$(AfterCleanDependsOn)"  Condition="'$(DisableSuperCleanTarget)'!='true'"> 
-  </Target>
-  
-  <Target Name="SuperRestore">
-    <Message Importance="high" Text="------ SuperRestore started: Project: $(MSBuildProjectName), Configuration:  $(Configuration)|$(Platform) ------" />
-    <CallTarget Targets="Restore" />
-    <Message Importance="high" Text="------ SuperRestore ended: Project: $(MSBuildProjectName), Configuration:  $(Configuration)|$(Platform) ------" />
-  </Target>
   
   <Target Name="SuperClean" Condition="'$(DisableSuperCleanTarget)' != 'true'">
     <ItemGroup>
-      <RemoveFiles Include="$(OutputPath)\**\*.*" />
+      <RemoveFiles Include="$(OutputPath)\*.*" />
       <RemoveFiles Include="$(BaseIntermediateOutputPath)\**\*" />
     </ItemGroup>
     <Message Importance="high" Text="------ SuperClean started: Project: $(MSBuildProjectName), Configuration:  $(Configuration)|$(Platform) ------" />
     <RemoveDir Directories="$(ModuleFolder)" Condition="Exists('$(ModuleFolder)')" />
     <Delete Files="@(RemoveFiles)" />
-    <CallTarget Targets="SuperRestore" />
     <Message Importance="high" Text="------ SuperClean ended: Project: $(MSBuildProjectName), Configuration:  $(Configuration)|$(Platform) ------" />
   </Target>
 
@@ -304,8 +289,7 @@ Copyright (c) Ollon, LLC. All rights reserved.
     <!-- Clear the temporary list of items not referenced -->
     <_PackagesNotReferenced Remove="@(_PackagesNotReferenced)" />
   </ItemGroup>
-  <Target Name="CheckPackageReferences"
-    Condition=" '$(EnableCentralPackageVersions)' != 'false' And '@(PackageReference)' != '' ">
+  <Target Name="CheckPackageReferences" Condition=" '$(EnableCentralPackageVersions)' != 'false' And '@(PackageReference)' != '' ">
     <ItemGroup>
       <!--
         Determine all of the original PackageReference items that did not have a PackageVersion
@@ -319,31 +303,19 @@ Copyright (c) Ollon, LLC. All rights reserved.
     <!--
       Generate an error if any PackageReference has a version specified and its not an implicit item
      -->
-    <Error
-      Text="The package reference '%(OriginalPackageReference.Identity)' should not specify a version.  Please specify the version in '$(CentralPackagesFile)'."
-      Condition=" '%(OriginalPackageReference.IsImplicitlyDefined)' != 'true' And '%(OriginalPackageReference.Version)' != '' "
-      File="$(MSBuildProjectFullPath) "/>
+    <Error Text="The package reference '%(OriginalPackageReference.Identity)' should not specify a version.  Please specify the version in '$(CentralPackagesFile)'." Condition=" '%(OriginalPackageReference.IsImplicitlyDefined)' != 'true' And '%(OriginalPackageReference.Version)' != '' " File="$(MSBuildProjectFullPath) "/>
     <!--
       Generate an error if any explicit PackageReference did not have matching PackageVersion
      -->
-    <Error
-      Text="The package reference '%(MissingPackageReference.Identity)' must have a version defined in '$(CentralPackagesFile)'."
-      Condition=" '@(MissingPackageReference)' != '' And '%(MissingPackageReference.IsImplicitlyDefined)' != 'true' "
-      File="$(MSBuildProjectFullPath)" />
+    <Error Text="The package reference '%(MissingPackageReference.Identity)' must have a version defined in '$(CentralPackagesFile)'." Condition=" '@(MissingPackageReference)' != '' And '%(MissingPackageReference.IsImplicitlyDefined)' != 'true' " File="$(MSBuildProjectFullPath)" />
     <!--
       Generate an error if any implicit PackageReference did not have matching PackageVersion
      -->
-    <Error
-      Text="The implicit package reference '%(MissingPackageReference.Identity)' must have a version defined in '$(CentralPackagesFile)'."
-      Condition=" '@(MissingPackageReference)' != '' And '%(MissingPackageReference.IsImplicitlyDefined)' == 'true' "
-      File="$(MSBuildProjectFullPath)" />
+    <Error Text="The implicit package reference '%(MissingPackageReference.Identity)' must have a version defined in '$(CentralPackagesFile)'." Condition=" '@(MissingPackageReference)' != '' And '%(MissingPackageReference.IsImplicitlyDefined)' == 'true' " File="$(MSBuildProjectFullPath)" />
     <!--
       Generate an error if any project specified a PackageReference and there is already the same GlobalPackageReference
      -->
-    <Error
-      Text="The package reference '%(DuplicateGlobalPackageReference.Identity)' is already defined as a GlobalPackageReference in '$(CentralPackagesFile)'.  Individual projects do not need to include a PackageReference if a GlobalPackageReference is declared."
-      Condition=" '@(DuplicateGlobalPackageReference)' != '' "
-      File="$(MSBuildProjectFullPath)" />
+    <Error Text="The package reference '%(DuplicateGlobalPackageReference.Identity)' is already defined as a GlobalPackageReference in '$(CentralPackagesFile)'.  Individual projects do not need to include a PackageReference if a GlobalPackageReference is declared." Condition=" '@(DuplicateGlobalPackageReference)' != '' " File="$(MSBuildProjectFullPath)" />
   </Target>
   <Import Project="$(CustomAfterCentralPackageVersionsTargets)" Condition=" '$(CustomAfterCentralPackageVersionsTargets)' != '' And Exists('$(CustomAfterCentralPackageVersionsTargets)') " />
 
@@ -404,21 +376,31 @@ Copyright (c) Ollon, LLC. All rights reserved.
         <Reference Include="System.Data">
           <Private>false</Private>
         </Reference>
-        <Reference Include="System.Data.DataSetExtensions">
-          <Private>false</Private>
-        </Reference>
         <Reference Include="System.ComponentModel.DataAnnotations">
           <Private>false</Private>
         </Reference>
-        <Reference Include="System.Data.Entity">
-          <Private>false</Private>
-        </Reference>
-        <Reference Include="System.Data.Entity.Design">
-          <Private>false</Private>
-        </Reference>
+        <PackageReference Include="EntityFramework">
+          <Version>6.2.0</Version>
+        </PackageReference>
       </ItemGroup>
     </When>
   </Choose>
- 
+
+  <Choose>
+    <When Condition="$(IncludeWebReferences) == 'true'">
+      <ItemGroup>
+        <Reference Include="System.Net">
+          <Private>false</Private>
+        </Reference>
+        <Reference Include="System.Net.Http">
+          <Private>false</Private>
+        </Reference>
+        <PackageReference Include="Newtonsoft.Json">
+          <Version>11.0.2</Version>
+        </PackageReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+
 
 </Project>

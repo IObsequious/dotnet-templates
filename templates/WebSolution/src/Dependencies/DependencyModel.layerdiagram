@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="a3433a47-d090-4f8e-a6b8-49c74a94779c" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="6a290b1f-5482-403e-8878-da6b0ad2e27c" name="ToolChain">
+      <comments>
+        <comment Id="be702b73-b3f0-4aa0-9698-d86984566838" name="Comment1">
+          <body>Developer Tools do not reference any projects. 
+Used for creating custom tools/build utilities/etc. to enhance the developer experience.</body>
+        </comment>
+      </comments>
+      <childLayers>
+        <layer Id="59ca4d57-5c09-43c7-923a-4c757f288ce4" name="5. Developer Tools">
+          <references>
+            <reference Id="62140574-8794-4ce1-a8a0-f13f98987f88" name="5. Developer Tools">
+              <ArtifactNode Label="5. Developer Tools" Category="CodeSchema_Project" Id="(Assembly=../5.%2520Developer%2520Tools)" />
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="382f9bf0-eeda-438e-8e19-fc71bd439704" name="1. Api Layer">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="4a6225ea-db77-41cc-9f34-86fd61398466" direction="Forward">
+          <layerMoniker Id="d3c6e9c8-50b4-4dec-9a8a-2508a6ffcd1e" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="58046d4d-676a-4926-92c4-2a80d3e16de1" name="1. Api Layer">
+          <ArtifactNode Label="1. Api Layer" Category="CodeSchema_Project" Id="(Assembly=../1.%2520Api%2520Layer)" />
+          <ExpandedNode Id="(Assembly=WebSolutionFile.WebApi)" Label="WebSolutionFile.WebApi.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="d3c6e9c8-50b4-4dec-9a8a-2508a6ffcd1e" name="2. Services Layer">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="aae3b0fa-eb54-4bd7-8144-a8ae144f6482" direction="Forward">
+          <layerMoniker Id="d7298307-1d9f-41f9-ad44-b5c5b0eeaa2c" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="6bcea684-c299-47ef-add5-85c8b8a02b1c" name="2. Services Layer">
+          <ArtifactNode Label="2. Services Layer" Category="CodeSchema_Project" Id="(Assembly=../2.%2520Services%2520Layer)" />
+          <ExpandedNode Id="(Assembly=WebSolutionFile.Features)" Label="WebSolutionFile.Features.dll" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Assembly=WebSolutionFile.Services)" Label="WebSolutionFile.Services.dll" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="d7298307-1d9f-41f9-ad44-b5c5b0eeaa2c" name="3. Data Access Layer">
+      <references>
+        <reference Id="103c6164-8c21-442a-8b6c-8aeedad21bcd" name="3. Data Access Layer">
+          <ArtifactNode Label="3. Data Access Layer" Category="CodeSchema_Project" Id="(Assembly=../3.%2520Data%2520Access%2520Layer)" />
+          <ExpandedNode Id="(Assembly=WebSolutionFile.DataAccess)" Label="WebSolutionFile.DataAccess.dll" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="47dc951d-9ecb-44d9-bea3-d1f4efb144a8" name="Testing">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="01b1ee0a-b324-40b2-bbf4-5bc823bfd47c" direction="Forward">
+          <layerMoniker Id="382f9bf0-eeda-438e-8e19-fc71bd439704" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="9d27451a-2201-4245-925d-8bcfc406a03d" direction="Forward">
+          <layerMoniker Id="d3c6e9c8-50b4-4dec-9a8a-2508a6ffcd1e" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="6111e5ac-9665-4c38-900f-3b8473060b7c" direction="Forward">
+          <layerMoniker Id="d7298307-1d9f-41f9-ad44-b5c5b0eeaa2c" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="7b0e4c3b-32f4-4585-b1e5-f971383fea87" name="4. Test Layer">
+          <references>
+            <reference Id="67d76be6-3b9b-4920-92d9-6c9e19c4b60b" name="4. Test Layer">
+              <ArtifactNode Label="4. Test Layer" Category="CodeSchema_Project" Id="(Assembly=../4.%2520Test%2520Layer)" />
+              <ExpandedNode Id="(Assembly=WebSolutionFile.Tests)" Label="WebSolutionFile.Tests.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
+    </layer>
+  </layers>
+</layerModel>

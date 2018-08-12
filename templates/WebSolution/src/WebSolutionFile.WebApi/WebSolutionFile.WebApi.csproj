@@ -1,0 +1,44 @@
+﻿<Project>
+  <PropertyGroup>
+    <DisableImplicitFrameworkReferences>false</DisableImplicitFrameworkReferences>
+  </PropertyGroup>
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk.Web" />
+
+  
+  
+  
+  
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+  
+  
+  
+  
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  
+  
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  
+  
+  
+  <ItemGroup>
+    <ProjectReference Include="..\WebSolutionFile.Features\WebSolutionFile.Features.csproj" />
+    <ProjectReference Include="..\WebSolutionFile.Services\WebSolutionFile.Services.csproj" />
+  </ItemGroup>
+
+
+  
+  
+  
+  
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk.Web" />
+</Project>

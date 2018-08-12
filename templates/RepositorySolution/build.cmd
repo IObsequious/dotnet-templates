@@ -12,6 +12,7 @@ set SOLUTIONFILE=%~dp0src\%%j
 )
 call "%DEVCMD%"
 popd
+msbuild "%SOLUTIONFILE%" /t:Restore /m /v:m 
 msbuild "%SOLUTIONFILE%" /t:Build /m /v:m 
 echo Complete!
 pause

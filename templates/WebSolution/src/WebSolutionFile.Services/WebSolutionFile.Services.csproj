@@ -1,0 +1,34 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <IncludeWebServiceReferences>true</IncludeWebServiceReferences>
+    <DisableImplicitFrameworkReferences>false</DisableImplicitFrameworkReferences>
+  </PropertyGroup>
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+
+  
+  
+  
+  
+  
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+
+  
+  
+  
+  
+  
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+
+
+  
+  
+  
+  
+  
+  <ItemGroup>
+    <ProjectReference Include="..\WebSolutionFile.DataAccess\WebSolutionFile.DataAccess.csproj" />
+  </ItemGroup>
+</Project>
