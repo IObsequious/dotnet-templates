@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+  <PropertyGroup>
+    <ReferencesDirectory>$(MSBuildThisFileDirectory)..\References\</ReferencesDirectory>
+    <TransformOnBuild>true</TransformOnBuild>
+    <Name>$(MSBuildProjectName)</Name>
+    <AssemblyName>$(Name)</AssemblyName>
+    <RootNamespace>$(Name)</RootNamespace>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DacApplicationName>$(Name)Package</DacApplicationName>
+    <TargetDatabaseName>$(Name)</TargetDatabaseName>
+    <SqlServerVerification>false</SqlServerVerification>
+    <IncludeCompositeObjects>true</IncludeCompositeObjects>
+    <TargetDatabaseSet>true</TargetDatabaseSet>
+    <GenerateCreateScript>true</GenerateCreateScript>
+    <CreateNewDatabase>true</CreateNewDatabase>
+    <GenerateCreateScript>true</GenerateCreateScript>
+    <RecursiveTriggersEnabled>true</RecursiveTriggersEnabled>
+    <EnableFullTextSearch>true</EnableFullTextSearch>
+    <ScriptDatabaseOptions>true</ScriptDatabaseOptions>
+    <SqlTargetName>$(Name)</SqlTargetName>
+    <SqlTargetFile>$(SqlTargetName).dacpac</SqlTargetFile>
+    <SqlTargetPath>$(OutputPath)$(SqlTargetFile)</SqlTargetPath>
+    <DeployScriptFileName>$(Name).deploy.sql</DeployScriptFileName>
+    <DeployScriptFilePath>$(OutputPath)$(DeployScriptFileName)</DeployScriptFilePath>
+    <PublishScriptFileName>$(Name).publish.sql</PublishScriptFileName>
+    <PublishScriptFilePath>$(OutputPath)$(PublishScriptFileName)</PublishScriptFilePath>
+    <BuildScriptName>$(Name).build.sql</BuildScriptName>
+    <Recovery>SIMPLE</Recovery>
+    <Trustworthy>True</Trustworthy>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{fb60407a-5744-4136-8243-6054fff5ef70}</ProjectGuid>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Scripts" />
+    <Folder Include="Scripts\Tables" />
+    <Folder Include="Scripts\Views" />
+    <Folder Include="Scripts\Procedures" />
+    <Folder Include="Scripts\PostDeployment" />
+    <Folder Include="Templates" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\PostDeployment\PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Templates\AltViews.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+    <None Include="Templates\Generator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+    <None Include="Templates\Template.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+  </ItemGroup>
+</Project>

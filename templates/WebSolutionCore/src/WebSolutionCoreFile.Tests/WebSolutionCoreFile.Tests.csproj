@@ -1,0 +1,42 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <IncludeTestReferences>true</IncludeTestReferences>
+    <DisableImplicitFrameworkReferences>false</DisableImplicitFrameworkReferences>
+    <ImportDirectoryBuildProps>false</ImportDirectoryBuildProps>
+    <ImportDirectoryBuildTargets>false</ImportDirectoryBuildTargets>
+  </PropertyGroup>
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+  
+  
+  
+  
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  
+  
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.2.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.2.1" />
+  </ItemGroup>
+
+  
+  
+  
+  <ItemGroup>
+    <ProjectReference Include="..\WebSolutionCoreFile.DataAccess\WebSolutionCoreFile.DataAccess.csproj" />
+    <ProjectReference Include="..\WebSolutionCoreFile.Features\WebSolutionCoreFile.Features.csproj" />
+    <ProjectReference Include="..\WebSolutionCoreFile.Services\WebSolutionCoreFile.Services.csproj" />
+    <ProjectReference Include="..\WebSolutionCoreFile.WebApi\WebSolutionCoreFile.WebApi.csproj" />
+  </ItemGroup>
+
+
+
+
+
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+</Project>

@@ -1,4 +1,4 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <IncludeWebFeaturesReferences>true</IncludeWebFeaturesReferences>
     <DisableImplicitFrameworkReferences>false</DisableImplicitFrameworkReferences>
@@ -11,7 +11,7 @@
 
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>net471</TargetFramework>
   </PropertyGroup>
 
 

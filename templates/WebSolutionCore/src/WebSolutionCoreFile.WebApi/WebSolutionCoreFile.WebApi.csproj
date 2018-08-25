@@ -1,0 +1,45 @@
+﻿<Project>
+  <PropertyGroup>
+    <DisableImplicitFrameworkReferences>false</DisableImplicitFrameworkReferences>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk.Web" />
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+  
+  
+  
+  
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  
+  
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  
+  
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.2-rtm-30894" />
+    <PackageReference Include="NSwag.AspNetCore" Version="11.18.5" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="3.0.0" />
+    <ProjectReference Include="..\WebSolutionCoreFile.Features\WebSolutionCoreFile.Features.csproj" />
+    <ProjectReference Include="..\WebSolutionCoreFile.Services\WebSolutionCoreFile.Services.csproj" />
+  </ItemGroup>
+
+
+  
+  
+  
+  
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk.Web" />
+</Project>

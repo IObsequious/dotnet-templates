@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Brad R. Marshall",
+  "classifications": ["Solution File"],
+  "name": "Web Solution File (Core)",
+  "identity": "Web.Solution.Core",
+  "shortName": "webslncore",
+  "sourceName": "WebSolutionCoreFile",
+  "tags": {
+    "language": "C#",
+    "type":"item"
+  }
+}

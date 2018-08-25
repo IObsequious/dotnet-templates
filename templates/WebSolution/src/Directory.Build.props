@@ -136,6 +136,7 @@ Copyright (c) Ollon, LLC. All rights reserved.
 
     <RepositoryDirectory>$([System.IO.Path]::GetFullPath('$(SolutionDir)..\'))</RepositoryDirectory>
     <RepositoryDirectory Condition="!HasTrailingSlash('$(RepositoryDirectory)')">$(RepositoryDirectory)\</RepositoryDirectory>
+    <ReferencesDirectory>$(RepositoryDirectory)src\References\</ReferencesDirectory>
 
     <OutputPath>$(RepositoryDirectory)bin\$(Configuration)\$(MSBuildProjectName)\</OutputPath>
     <BaseIntermediateOutputPath>$(RepositoryDirectory)bin\obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>

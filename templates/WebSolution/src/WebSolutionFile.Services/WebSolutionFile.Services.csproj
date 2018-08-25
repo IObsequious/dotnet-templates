@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <IncludeWebServiceReferences>true</IncludeWebServiceReferences>
+    <IncludeWebApiReferences>true</IncludeWebApiReferences>
     <DisableImplicitFrameworkReferences>false</DisableImplicitFrameworkReferences>
   </PropertyGroup>
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
@@ -11,7 +11,7 @@
   
   
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>net471</TargetFramework>
   </PropertyGroup>
 
 

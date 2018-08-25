@@ -1,0 +1,28 @@
+﻿{
+  "runtime": "NetCore21",
+  "swaggerGenerator": {
+    "webApiToSwagger": {
+      "controllerNames": [
+        "Values"
+      ],
+      "isAspNetCore": true,
+      "defaultUrlTemplate": "api/v1/{controller}/{id?}",
+      "defaultPropertyNameHandling": "CamelCase",
+      "defaultReferenceTypeNullHandling": "Null",
+      "defaultEnumHandling": "Integer",
+      "flattenInheritanceHierarchy": false,
+      "generateKnownTypes": true,
+      "generateXmlObjects": false,
+      "generateAbstractProperties": false,
+      "addMissingPathParameters": false,
+      "ignoreObsoleteProperties": false,
+      "allowReferencesWithProperties": false,
+      "output": "swagger.json",
+      "assemblyPaths": [
+        "../../bin/Debug/WebSolutionCoreFile/WebSolutionCoreFile.dll"
+      ],
+      "referencePaths": []
+    }
+  },
+  "codeGenerators": {}
+}
