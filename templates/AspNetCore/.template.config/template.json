@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Brad R. Marshall",
+  "classifications": ["Solution File"],
+  "name": "Asp.Net Core Solution",
+  "identity": "AspNetCore",
+  "shortName": "aspnetcore",
+  "sourceName": "AspNetCoreSolution",
+  "tags": {
+    "language": "C#",
+    "type":"item"
+  }
+}
