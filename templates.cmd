@@ -21,7 +21,7 @@ ECHO ===========================================================================
 ECHO                            Press 'Q' to Quit
 ECHO =============================================================================
 echo.
-choice /c 1234q /n /m "Choose a menu option, or Q to quit: "
+choice /c 12345q /n /m "Choose a menu option, or Q to quit: "
 SET TYPE=%ERRORLEVEL%
 IF %TYPE%==1 SET SLN=reposln
 IF %TYPE%==2 SET SLN=websln
